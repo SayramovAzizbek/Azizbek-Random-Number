@@ -5,7 +5,7 @@ let refreshBtn = document.querySelector(".refresh-btn");
 let textCounter = document.querySelector(".text-counter");
 let randomResText = document.querySelector(".random-res-text");
 
-const randomNumber = Math.floor(Math.random() * 100);
+const randomNumber = Math.floor(Math.random() * 10) + 1;
 console.log(randomNumber);
 
 userChance = 6;
@@ -25,7 +25,7 @@ formRandom.addEventListener("submit", (evt) => {
     formInput.disabled = true;
     randomBtn.setAttribute("disabled", "Stop");
     randomResText.classList.add("text-white", "bg-danger");
-    randomResText.textContent = `Unfortunately, your chance has run out. Please try again`;
+    randomResText.textContent = `Unfortunately, your chance has run out. Please try again. The answer was ${randomNumber}`;
   } else if (randomNumber > formInputValue) {
     randomResText.classList.add("text-danger", "bg-info");
     randomResText.textContent = `Bigger than the number you found`;
