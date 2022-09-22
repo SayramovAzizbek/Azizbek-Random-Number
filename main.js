@@ -13,15 +13,19 @@ textCounter.textContent = `Number of remaining attempts : ${userChance}`;
 
 formRandom.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  userChance--;
-  textCounter.textContent = `Number of remaining attempts : ${userChance}`;
-
   formInputValue = Number(formInput.value);
-  if (formInputValue === 0) {
+
+  if (formInputValue === 0 || isNaN(formInputValue)) {
     randomResText.classList.add("text-danger", "bg-info");
     randomResText.textContent = `Enter a number`;
     userChance = 6;
-  } else if (userChance === 0) {
+    return;
+  }
+
+  userChance--;
+  textCounter.textContent = `Number of remaining attempts : ${userChance}`;
+
+  if (userChance === 0) {
     formInput.disabled = true;
     randomBtn.setAttribute("disabled", "Stop");
     randomResText.classList.add("text-white", "bg-danger");
@@ -33,6 +37,7 @@ formRandom.addEventListener("submit", (evt) => {
     randomResText.classList.add("text-danger", "bg-info");
     randomResText.textContent = `Smaller than the number you found`;
   } else if (formInputValue === randomNumber) {
+    randomResText.classList.remove("text-white", "bg-info");
     randomResText.classList.add("text-white", "bg-success");
     randomResText.textContent = `Congratulations. You won.`;
     formInput.disabled = true;
