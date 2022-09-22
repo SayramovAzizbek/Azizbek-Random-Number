@@ -5,7 +5,7 @@ let refreshBtn = document.querySelector(".refresh-btn");
 let textCounter = document.querySelector(".text-counter");
 let randomResText = document.querySelector(".random-res-text");
 
-const randomNumber = Math.floor(Math.random() * 10) + 1;
+const randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
 
 userChance = 6;
