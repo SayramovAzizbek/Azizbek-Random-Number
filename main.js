@@ -30,6 +30,7 @@ formRandom.addEventListener("submit", (evt) => {
     randomBtn.setAttribute("disabled", "Stop");
     randomResText.classList.add("text-white", "bg-danger");
     randomResText.textContent = `Unfortunately, your chance has run out. Please try again. The answer was ${randomNumber}`;
+    refreshBtn.removeAttribute("disabled");
   } else if (randomNumber > formInputValue) {
     randomResText.classList.add("text-danger", "bg-info");
     randomResText.textContent = `Bigger than the number you found`;
@@ -42,6 +43,7 @@ formRandom.addEventListener("submit", (evt) => {
     randomResText.textContent = `Congratulations. You won.`;
     formInput.disabled = true;
     randomBtn.setAttribute("disabled", "Stop");
+    refreshBtn.removeAttribute("disabled");
   }
 });
 
