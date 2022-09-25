@@ -6,7 +6,7 @@ let textCounter = document.querySelector(".text-counter");
 let randomResText = document.querySelector(".random-res-text");
 
 const randomNumber = Math.floor(Math.random() * 100) + 1;
-console.log(randomNumber);
+// console.log(randomNumber);
 
 userChance = 6;
 textCounter.textContent = `Number of remaining attempts : ${userChance}`;
