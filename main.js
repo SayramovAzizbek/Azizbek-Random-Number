@@ -18,7 +18,7 @@ formRandom.addEventListener("submit", (evt) => {
   if (formInputValue === 0 || isNaN(formInputValue)) {
     randomResText.classList.add("text-danger", "bg-info");
     randomResText.textContent = `Enter a number`;
-    userChance = 6;
+    userChance = 6;co
     return;
   }
 
