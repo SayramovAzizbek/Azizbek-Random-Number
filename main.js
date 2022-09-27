@@ -15,38 +15,73 @@ formRandom.addEventListener("submit", (evt) => {
   evt.preventDefault();
   formInputValue = Number(formInput.value);
 
-  if (formInputValue === 0 || isNaN(formInputValue)) {
-    randomResText.classList.add("text-danger", "bg-info");
-    randomResText.textContent = `Enter a number`;
-    userChance = 6;
-    return;
-  }
+  if (formInputValue === 0 || isNaN(formInputValue)) return emptyInput();
+
+  if (formInputValue === randomNumber) return winnerCase();
 
   userChance--;
   textCounter.textContent = `Number of remaining attempts : ${userChance}`;
 
-  if (userChance === 0) {
-    formInput.disabled = true;
-    randomBtn.setAttribute("disabled", "Stop");
-    randomResText.classList.add("text-white", "bg-danger");
-    randomResText.textContent = `Unfortunately, your chance has run out. Please try again. The answer was ${randomNumber}`;
-    refreshBtn.removeAttribute("disabled");
-  } else if (randomNumber > formInputValue) {
-    randomResText.classList.add("text-danger", "bg-info");
-    randomResText.textContent = `Bigger than the number you found`;
-  } else if (randomNumber < formInputValue) {
-    randomResText.classList.add("text-danger", "bg-info");
-    randomResText.textContent = `Smaller than the number you found`;
-  } else if (formInputValue === randomNumber) {
-    randomResText.classList.remove("text-white", "bg-info");
-    randomResText.classList.add("text-white", "bg-success");
-    randomResText.textContent = `Congratulations. You won.`;
-    formInput.disabled = true;
-    randomBtn.setAttribute("disabled", "Stop");
-    refreshBtn.removeAttribute("disabled");
+  if (randomNumber > formInputValue) {
+    biggerThanUserNumber();
+  } else {
+    smallerThanUserNumber();
   }
+
+  if (userChance === 0) loseCase();
+
+  // formInput.value = "";
 });
 
 refreshBtn.addEventListener("click", () => {
   window.location.reload();
 });
+
+/**
+ * Calls when user enters string or 0 number
+ */
+const emptyInput = () => {
+  randomResText.classList.add("text-danger", "bg-info");
+  randomResText.textContent = `Enter a number`;
+  // userChance = 6;
+  return;
+};
+
+/**
+ * Calls when user enters bigger number than random number
+ */
+const biggerThanUserNumber = () => {
+  randomResText.classList.add("text-danger", "bg-info");
+  randomResText.textContent = `Bigger than the number you found`;
+};
+
+/**
+ * Calls when user enters smaller number than random number
+ */
+const smallerThanUserNumber = () => {
+  randomResText.classList.add("text-danger", "bg-info");
+  randomResText.textContent = `Smaller than the number you found`;
+};
+
+/**
+ * Calls when user spent all chances
+ */
+const loseCase = () => {
+  formInput.disabled = true;
+  randomBtn.setAttribute("disabled", "Stop");
+  randomResText.classList.add("text-white", "bg-danger");
+  randomResText.textContent = `Unfortunately, your chance has run out. Please try again. The answer was ${randomNumber}`;
+  refreshBtn.removeAttribute("disabled");
+};
+
+/**
+ * Calls when user wins
+ */
+const winnerCase = () => {
+  randomResText.classList.remove("text-danger", "bg-info");
+  randomResText.classList.add("text-white", "bg-success");
+  randomResText.textContent = `Congratulations. You won.`;
+  formInput.disabled = true;
+  randomBtn.setAttribute("disabled", "Stop");
+  refreshBtn.removeAttribute("disabled");
+};
